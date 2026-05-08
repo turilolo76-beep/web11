@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل فعاليات الجامعة - الرئيسية</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <style>
+        /* ===== SLIDER FIX ===== */
+        .slider-container {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            border-radius: 12px;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .featured-slider {
+            position: relative;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            pointer-events: none;
+            box-sizing: border-box;
+        }
+
+        .slider-btn {
+            pointer-events: all;
+            background: rgba(255,255,255,0.85);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .slider-btn:hover {
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+
+                <!-- Logo -->
+                <a class="navbar-brand fw-bold" href="index.html">
+                    <i class="fas fa-calendar-alt me-2"></i>
+                    دليل فعاليات الجامعة
+                </a>
+
+                <!-- Toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">الرئيسية</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="events.html">الفعاليات</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">عن الدليل</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">اتصل بنا</a>
+                        </li>
+
+                        <!-- Dark Mode -->
+                        <li class="nav-item">
+                            <button class="btn btn-outline-light btn-sm ms-2"
+                                id="darkModeToggle"
+                                aria-label="تبديل الوضع الليلي">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="main-content">
+
+        <!-- HERO -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content text-center text-white">
+
+                    <h1 class="display-4 fw-bold mb-3">
+                        اكتشف فعاليات الجامعة
+                    </h1>
+
+                    <p class="lead mb-4">
+                        كل ما تحتاجه للاستفادة من حياتك الجامعية في مكان واحد
+                    </p>
+
+                    <a href="events.html" class="btn btn-primary btn-lg px-5">
+                        استعرض الفعاليات
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FEATURED ================= -->
+        <section class="featured-section py-5">
+
+            <div class="container">
+
+                <h2 class="section-title text-center mb-5">
+                    <i class="fas fa-star text-warning me-2"></i>
+                    فعاليات بارزة هذا الأسبوع
+                </h2>
+
+                <!-- Slider -->
+                <div class="featured-slider" id="featuredSlider">
+
+                    <div class="slider-container">
+                        <div class="slider-track" id="sliderTrack">
+
+                            <div class="slide">
+                                <img src="https://picsum.photos/seed/coding/800/400" alt="برمجة">
+                            </div>
+                            <div class="slide">
+                                <img src="https://picsum.photos/seed/culture/800/400" alt="ثقافة">
+                            </div>
+                            <div class="slide">
+                                <img src="https://picsum.photos/seed/sports/800/400" alt="رياضة">
+                            </div>
+                            <div class="slide">
+                                <img src="https://picsum.photos/seed/music/800/400" alt="موسيقى">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="slider-controls">
+                        <button class="slider-btn prev-btn" id="prevBtn" aria-label="السابق">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+
+                        <button class="slider-btn next-btn" id="nextBtn" aria-label="التالي">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= CATEGORIES ================= -->
+        <section class="categories-section py-5 bg-light">
+
+            <div class="container">
+
+                <h2 class="section-title text-center mb-5">
+                    تصنيفات سريعة
+                </h2>
+
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- JS -->
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= LATEST EVENTS ================= -->
+        <section class="latest-events py-5">
+
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center mb-5">
+
+                    <h2 class="section-title mb-0">
+                        أحدث الفعاليات
+                    </h2>
+
+                    <a href="events.html" class="btn btn-outline-primary">
+                        عرض الكل
+                    </a>
+
+                </div>
+
+                <div class="row" id="latestEvents">
+                    <!-- JS -->
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer bg-dark text-white py-5">
+
+        <div class="container">
+
+            <div class="row">
+
+                <!-- About -->
+                <div class="col-lg-4 mb-4">
+                    <h5>
+                        <i class="fas fa-calendar-alt me-2"></i>
+                        دليل فعاليات الجامعة
+                    </h5>
+                    <p>
+                        منصتك لمتابعة كل فعاليات الجامعة والاستفادة من الفرص المتاحة.
+                    </p>
+                </div>
+
+                <!-- Links -->
+                <div class="col-lg-4 mb-4">
+                    <h6>روابط سريعة</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="events.html" class="text-white-50">الفعاليات</a></li>
+                        <li><a href="about.html" class="text-white-50">عن الدليل</a></li>
+                        <li><a href="contact.html" class="text-white-50">اتصل بنا</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social -->
+                <div class="col-lg-4 mb-4">
+                    <h6>تابعنا</h6>
+
+                    <div class="social-links">
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white-50"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+
+                    <p class="mt-3 mb-0">
+                        events@university.edu.sa
+                    </p>
+                </div>
+
+            </div>
+
+            <hr class="my-4">
+
+            <!-- COPYRIGHT -->
+            <div class="text-center small">
+
+                <p class="mb-1">
+                    &copy; 2026 دليل فعاليات الجامعة. جميع الحقوق محفوظة.Alis_113817, rana_219252, renad_285228 , abdullah_291937
+                </p>
+
+                <p class="mb-0 text-muted">
+                    <strong>فريق المشروع:</strong> Alis_113817
+                </p>
+
+                <p class="mb-0 text-muted">
+                    Designed by <strong>Alis_113817</strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- Scroll Top -->
+    <button class="scroll-top-btn" id="scrollTopBtn">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- ===== SLIDER JS ===== -->
+    <script>
+        const track = document.getElementById('sliderTrack');
+        const slides = track.querySelectorAll('.slide');
+        let current = 0;
+
+        function goTo(index) {
+            current = (index + slides.length) % slides.length;
+            track.style.transform = `translateX(${current * 100}%)`;
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => goTo(current - 1));
+        document.getElementById('prevBtn').addEventListener('click', () => goTo(current + 1));
+    </script>
+
+</body>
+</html>

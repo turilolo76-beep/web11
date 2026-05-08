@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تفاصيل الفعالية - دليل فعاليات الجامعة</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="bookingModalLabel">
+          <i class="fas fa-ticket-alt me-2"></i>حجز مكانك في الفعالية
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form id="bookingForm">
+          <input type="hidden" id="modalEventId" value="">
+          <div class="mb-3">
+            <label class="form-label fw-bold">الاسم الكامل <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="bookerName" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">البريد الإلكتروني <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="bookerEmail" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">عدد المقاعد</label>
+            <select class="form-select" id="seatsCount">
+              <option value="1">1 مقعد</option>
+              <option value="2">2 مقعد</option>
+              <option value="3">3 مقاعد</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="form-label">ملاحظات إضافية</label>
+            <textarea class="form-control" rows="3" id="bookerNotes" placeholder="متطلبات خاصة..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-success w-100 fw-bold">
+            <i class="fas fa-check-circle me-2"></i>تأكيد الحجز
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<header>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <div class="brand-icon"><i class="fas fa-calendar-star"></i></div>
+        دليل فعاليات الجامعة
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home me-1 opacity-75"></i>الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link active" href="events.html"><i class="fas fa-calendar-alt me-1 opacity-75"></i>الفعاليات</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1 opacity-75"></i>عن الدليل</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-envelope me-1 opacity-75"></i>اتصل بنا</a></li>
+          <li class="nav-item"><button class="btn-dark-toggle" id="darkModeToggle"><i class="fas fa-moon"></i></button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="main-content">
+
+  <!-- Event Hero -->
+  <div class="event-detail-hero">
+    <div class="hero-bg" id="eventHeroBg"></div>
+    <div class="container">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb-custom">
+        <a href="index.html">الرئيسية</a>
+        <i class="fas fa-chevron-left" style="font-size:.65rem"></i>
+        <a href="events.html">الفعاليات</a>
+        <i class="fas fa-chevron-left" style="font-size:.65rem"></i>
+        <span style="color:rgba(255,255,255,.9)" id="eventTitle">...</span>
+      </div>
+
+      <!-- Tags -->
+      <div class="event-detail-tags">
+        <span class="event-detail-tag" id="eventCategoryBadge"></span>
+        <span class="event-detail-tag" style="background:rgba(255,255,255,.1);color:#fff" id="eventPrice"></span>
+      </div>
+
+      <h1 class="event-detail-title" id="eventTitle">جارٍ التحميل...</h1>
+
+      <!-- Quick info bar -->
+      <div class="event-detail-quick-info">
+        <div class="eq-item">
+          <i class="fas fa-calendar-alt"></i>
+          <div><div class="eq-label" style="font-size:.72rem;color:rgba(255,255,255,.45)">التاريخ</div><strong id="eventDate">—</strong></div>
+        </div>
+        <div class="eq-item">
+          <i class="fas fa-clock"></i>
+          <div><div class="eq-label" style="font-size:.72rem;color:rgba(255,255,255,.45)">الوقت</div><strong id="eventTime">—</strong></div>
+        </div>
+        <div class="eq-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div><div class="eq-label" style="font-size:.72rem;color:rgba(255,255,255,.45)">المكان</div><strong id="eventLocation">—</strong></div>
+        </div>
+        <div class="eq-item">
+          <i class="fas fa-hourglass-half"></i>
+          <div><div class="eq-label" style="font-size:.72rem;color:rgba(255,255,255,.45)">المدة</div><strong id="eventDuration">—</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container py-5">
+    <div class="row g-4">
+
+      <!-- Left: Main Content -->
+      <div class="col-lg-8">
+
+        <!-- Image Carousel -->
+        <div class="detail-main-card mb-4">
+          <div id="eventImageCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carouselInner"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#eventImageCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#eventImageCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+          <div class="card-body">
+            <h3 class="fw-bold mb-3" style="font-family:'Tajawal',sans-serif" id="eventTitle2">—</h3>
+            <div class="event-desc" id="eventDescription"></div>
+            <div class="event-action-btns">
+              <button class="btn-book" id="bookingBtn">
+                <i class="fas fa-ticket-alt"></i>احجز مكانك
+              </button>
+              <button class="btn-cal" id="calendarBtn">
+                <i class="fas fa-calendar-plus"></i>أضف للتقويم
+              </button>
+              <button class="btn-share" id="shareBtn">
+                <i class="fas fa-share-alt"></i>شارك
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="detail-main-card mb-4">
+          <div class="card-body">
+            <h5 class="fw-bold mb-3"><i class="fas fa-map-marked-alt text-danger me-2"></i>الموقع على الخريطة</h5>
+            <div class="map-placeholder">
+              <i class="fas fa-map-location-dot"></i>
+              <p class="mb-1 fw-600" id="eventLocation2">—</p>
+              <small>اضغط هنا للتنقل عبر تطبيق الخرائط</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Events -->
+        <div class="detail-main-card">
+          <div class="card-body">
+            <h5 class="fw-bold mb-4"><i class="fas fa-calendar-week text-primary me-2"></i>فعاليات ذات صلة</h5>
+            <div class="d-flex flex-column gap-3" id="relatedEvents"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Sidebar -->
+      <div class="col-lg-4">
+
+        <!-- Countdown -->
+        <div class="sidebar-card">
+          <h5><i class="fas fa-hourglass-half text-warning"></i>باقي على الفعالية</h5>
+          <div id="countdown"></div>
+        </div>
+
+        <!-- Quick Info -->
+        <div class="sidebar-card">
+          <h5><i class="fas fa-info-circle text-primary"></i>معلومات الفعالية</h5>
+          <div class="info-item">
+            <i class="fas fa-users"></i>
+            <div><div class="ii-label">السعة الكلية</div><div class="ii-val" id="eventSeats">—</div></div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-hourglass-half"></i>
+            <div><div class="ii-label">مدة الفعالية</div><div class="ii-val" id="eventDuration2">—</div></div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-language"></i>
+            <div><div class="ii-label">لغة الفعالية</div><div class="ii-val" id="eventLang">—</div></div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-certificate"></i>
+            <div><div class="ii-label">شهادة حضور</div><div class="ii-val" id="eventCert">—</div></div>
+          </div>
+        </div>
+
+        <!-- Book CTA -->
+        <div class="sidebar-card text-center" style="background:linear-gradient(135deg,#1a56db,#06b6d4);border:none">
+          <i class="fas fa-ticket-alt fa-2x text-white mb-3 d-block opacity-75"></i>
+          <h5 style="color:#fff;border:none">سجّل حضورك الآن</h5>
+          <p style="color:rgba(255,255,255,.75);font-size:.85rem">الأماكن محدودة — احجز مكانك قبل الامتلاء</p>
+          <button class="btn btn-light fw-bold w-100" id="bookingBtn2" onclick="document.getElementById('bookingBtn').click()">
+            <i class="fas fa-check me-2 text-primary"></i>احجز الآن
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel"><i class="fas fa-ticket-alt me-2"></i>حجز مكان في الفعالية</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <form id="bookingForm">
+          <input type="hidden" id="modalEventId">
+          <div class="mb-3">
+            <label class="form-label fw-bold">الاسم الكامل <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" required placeholder="أدخل اسمك الكامل">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">البريد الإلكتروني <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" required placeholder="example@email.com">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">عدد المقاعد</label>
+            <select class="form-select">
+              <option value="1">1 مقعد</option>
+              <option value="2">2 مقعد</option>
+              <option value="3">3 مقاعد</option>
+              <option value="4">4 مقاعد</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="form-label fw-bold">ملاحظات</label>
+            <textarea class="form-control" rows="3" placeholder="متطلبات خاصة أو ملاحظات..."></textarea>
+          </div>
+          <button type="submit" class="btn-confirm">
+            <i class="fas fa-check-circle me-2"></i>تأكيد الحجز
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand"><i class="fas fa-calendar-star text-primary"></i> دليل فعاليات الجامعة <span class="brand-dot"></span></div>
+        <p>منصتك الشاملة لكل فعاليات الجامعة في مكان واحد.</p>
+      </div>
+      <div class="col-lg-4 col-6">
+        <div class="footer-heading">الصفحات</div>
+        <ul class="footer-links">
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="events.html">الفعاليات</a></li>
+          <li><a href="about.html">عن الدليل</a></li>
+          <li><a href="contact.html">اتصل بنا</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-heading">تابعنا</div>
+        <div class="footer-social">
+          <a href="#" class="fs-btn"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="fs-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="fs-btn"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <p class="footer-copy">© 2026 دليل فعاليات الجامعة. جميع الحقوق محفوظة.</p>
+  </div>
+</footer>
+
+<button class="scroll-top-btn" id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+  // Sync title in two places
+  document.addEventListener('DOMContentLoaded', function() {
+    const t1 = document.getElementById('eventTitle');
+    const t2 = document.getElementById('eventTitle2');
+    const l2 = document.getElementById('eventLocation2');
+    const d2 = document.getElementById('eventDuration2');
+    const observer = new MutationObserver(() => {
+      if (t2 && t1) t2.textContent = t1.textContent;
+    });
+    if (t1) observer.observe(t1, { childList: true, subtree: true, characterData: true });
+    // Also fill location2 and duration2 from filled elements
+    setTimeout(() => {
+      const loc = document.getElementById('eventLocation');
+      const dur = document.getElementById('eventDuration');
+      if (l2 && loc) l2.textContent = loc.textContent;
+      if (d2 && dur) d2.textContent = dur.textContent;
+    }, 200);
+  });
+</script>
+// Booking Modal
+document.getElementById('bookingBtn')?.addEventListener('click', function() {
+  document.getElementById('modalEventId').value = eventId;
+  new bootstrap.Modal(document.getElementById('bookingModal')).show();
+});
+
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Booking success
+  const alert = `
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <i class="fas fa-check-circle me-2"></i>
+      تم حجز مكانك بنجاح! 📅<br>
+      <small class="mt-1 d-block">رقم الحجز: #${Date.now().toString().slice(-6)}</small>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  `;
+  
+  // Show success & close modal
+  this.closest('.modal').querySelector('.modal-body').innerHTML = alert;
+  setTimeout(() => bootstrap.Modal.getInstance(this.closest('.modal')).hide(), 3000);
+  
+  // Save to localStorage
+  const booking = {
+    id: eventId,
+    name: document.getElementById('bookerName').value,
+    email: document.getElementById('bookerEmail').value,
+    seats: document.getElementById('seatsCount').value,
+    date: new Date().toLocaleDateString('ar-SA')
+  };
+  
+  let bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+  bookings.push(booking);
+  localStorage.setItem('bookings', JSON.stringify(bookings));
+});
+</body>
+</html>
